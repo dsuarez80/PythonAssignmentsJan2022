@@ -1,6 +1,5 @@
 #Week 1 weekend project - xl logger by Diego Suarez
 
-from multiprocessing.sharedctypes import Value
 from openpyxl import load_workbook
 import os, logging
 
