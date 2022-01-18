@@ -64,18 +64,22 @@ def workbook_loader():
     workbook_date = workbook_name.split("_")[-1:-3:-1]
     print(workbook_date)
 
-    #format the year and month from previous list result into a format that would be included within the datetime value present in the workbook
-    year_month = f'{workbook_date[0]}-{months[workbook_date[1].lower()]}'
-    print(year_month)
+    try:
+        #format the year and month from previous list result into a format that would be included within the datetime value present in the workbook
+        year_month = f'{workbook_date[0]}-{months[workbook_date[1].lower()]}'
+        print(year_month)
+    except:
+        print("\n***File is in incorrect naming format. Please choose a different file or correct file naming structure such that the month and year are the last 2 elements in the name separated by underscores.***\n")
+        workbook_loader()
 
-    #find the row the matches the date of the file by iterating through the first column
     row = 0
+    #find the row the matches the date of the file by iterating through the first column
     for cell in worksheet["A"]:
         row += 1
         if year_month in str(cell.value):
             print("Found match", year_month, cell.value, "row", row)
             break
-    
+
     header_row = list(filter(lambda x : x != None, list(worksheet.iter_rows(max_row = 1, values_only = True))[0]))
     current_row = list(filter(lambda x : x != None, list(worksheet.iter_rows(min_row = row, max_row = row, values_only = True))[0][1:]))
 
@@ -105,35 +109,54 @@ def workbook_loader():
     print(create_scores_list(current_col))
     
     log_workSheet2(label_col, create_scores_list(current_col))
+    exit()
 
 #return list of tuples for each score with its evaluation of good or bad
 def create_scores_list(scores):
     evaluations = []
-    if scores[0] > 200:
-        evaluations.append((scores[0], "Good"))
-    else:
-        evaluations.append((scores[0], "Bad"))
-    if scores[1] > 100:
-        evaluations.append((scores[1], "Good"))
-    else:
-        evaluations.append((scores[1], "Bad"))
-    if scores[2] > 100:
-        evaluations.append((scores[2], "Good"))
-    else:
-        evaluations.append((scores[2], "Bad"))
-    return evaluations
+    try:
+        if scores[0] > 200:
+            evaluations.append((scores[0], "Good"))
+        else:
+            evaluations.append((scores[0], "Bad"))
+        if scores[1] > 100:
+            evaluations.append((scores[1], "Good"))
+        else:
+            evaluations.append((scores[1], "Bad"))
+        if scores[2] > 100:
+            evaluations.append((scores[2], "Good"))
+        else:
+            evaluations.append((scores[2], "Bad"))
+        return evaluations
+    except IndexError as ie:
+        msg = str(ie) + " - Unable to find scores within worksheet 2"
+        print(msg)
+        logging.error(msg)
+        exit()
+
 
 def log_worksheet1(date, header_cells, values):
-    logging.info(f"Month of {date[1].capitalize()}, {date[0]}" )
-    logging.info(f"{header_cells[0]}: {values[0]}")
-    for x in range(1, len(values)):
-        logging.info(f"{header_cells[x]}: {values[x]*100}%")
+    try:
+        logging.info(f"Month of {date[1].capitalize()}, {date[0]}" )
+        logging.info(f"{header_cells[0]}: {values[0]}")
+        for x in range(1, len(values)):
+            logging.info(f"{header_cells[x]}: {values[x]*100}%")
+    except IndexError as ie:
+        msg = str(ie) + " - Unable to find month within worksheet 1"
+        print(msg)
+        logging.error(msg)
+        exit()
     
 def log_workSheet2(header, scores):
-    logging.info(header[0])
-    for x in range(0, len(scores)):
-        logging.info(f"{header[x+2]}: {scores[x][0]} : {scores[x][1]}")
-        
+    try:
+        logging.info(header[0])
+        for x in range(0, len(scores)):
+            logging.info(f"{header[x+2]}: {scores[x][0]} : {scores[x][1]}")
+    except IndexError as ie:
+        msg = ie + "Unable to find month within worksheet 2"
+        print(msg)
+        logging.error(msg)
+        exit()
 
 
 if __name__ == "__main__":
