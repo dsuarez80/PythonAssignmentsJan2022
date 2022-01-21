@@ -1,7 +1,10 @@
-2022-01-18 15:26:11 - INFO Month of January, 2018
-2022-01-18 15:26:11 - INFO Calls Offered: 16915
-2022-01-18 15:26:11 - INFO  Abandon after 30s: 2.32%
-2022-01-18 15:26:11 - INFO FCR: 86.5%
-2022-01-18 15:26:11 - INFO DSAT : 14.2%
-2022-01-18 15:26:11 - INFO CSAT : 78.3%
-2022-01-18 15:26:11 - ERROR list index out of range - Unable to find scores within worksheet 2
+2022-01-18 16:03:36 - INFO Month of March, 2018
+2022-01-18 16:03:36 - INFO Calls Offered: 22343
+2022-01-18 16:03:36 - INFO  Abandon after 30s: 3.05%
+2022-01-18 16:03:36 - INFO FCR: 86.0%
+2022-01-18 16:03:36 - INFO DSAT : 18.0%
+2022-01-18 16:03:36 - INFO CSAT : 74.4%
+2022-01-18 16:03:36 - INFO Net Promoter Score
+2022-01-18 16:03:36 - INFO Promoters (Recommend Score 9 to 10): 279 : Good
+2022-01-18 16:03:36 - INFO Passives (Recommend Score 7 to 8): 21 : Bad
+2022-01-18 16:03:36 - INFO Dectractors (recommend Score 0 to 6): 33 : Bad

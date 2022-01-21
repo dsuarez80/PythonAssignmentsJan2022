@@ -33,8 +33,7 @@ def getWorkbookName():
             print("Selected:", choice, xlFiles[choice-1])
             return xlFiles[choice-1][:-5]
         else:
-            print("Invalid choice.")
-        
+            print("Invalid choice.")     
 
 """def getDigit():
     n = input()
