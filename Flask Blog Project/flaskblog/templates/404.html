@@ -1,0 +1,9 @@
+{% extends "layout.html" %}
+{% block content %}
+<article class="media content-section">
+    <div class="media-body">
+        <h1 class="text-center">Uh oh! 404 Not Found</h1>
+        <img class="rounded mx-auto d-block" src="{{ url_for('static', filename='assets/uhoh.png') }}" alt="uhoh">
+    </div>
+</article>
+{% endblock content %}
